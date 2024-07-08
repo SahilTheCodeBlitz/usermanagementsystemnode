@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  
+    nav {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+    }
+
+    .search-box {
+      display: flex;
+    }
+
+    .search-box input[type="text"] {
+      padding: 8px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+    }
+
+    .search-box button {
+      padding: 8px 12px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+
+    .search-box button:hover {
+      background-color: #d3ecd4;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  
+    h1 {
+      text-align: center;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+  
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  
+    tr:hover {
+      background-color: #ddd;
+    }
+  
+    .action-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .action-btns button {
+      margin-right: 5px;
+      padding: 5px 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+  
+    .action-btns button:hover {
+      background-color: #d3ecd4;
+      border-radius: 5px;
+    }
+
+    .add-user-btn {
+      padding: 10px 20px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: block;
+      width: 100%;
+      max-width: 200px;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-box {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">User Management System</div>
+      <div class="search-box">
+        <form action="/" method="post">
+          <input type="text" name="search" placeholder="Search...">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <button class="add-user-btn" onclick="window.location.href='/addUser'">Add New User</button>
+  <div class="container">
+    
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Comments</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% locals.rows.forEach(function(row) { %>
+          <tr>
+              <td><%= row.id %></td>
+              <td><%= row.first_name %></td>
+              <td><%= row.last_name %></td>
+              <td><%= row.email %></td>
+              <td><%= row.phone %></td>
+              <td><%= row.comments %></td>
+              <td><%= row.status %></td>
+              
+              <td class="action-btns">
+                
+                <button class="edit-btn" onclick="redirectToEdit('<%= row.id %>')">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function redirectToEdit(id) {
+      window.location.href = '/editPage/' + id;
+    }
+  </script>
+</body>
+</html>
